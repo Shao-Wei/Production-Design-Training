@@ -123,14 +123,14 @@ See `PROGRESS.md` for the editable checklist.
 ## Scene Study Scoreboard
 
 <!-- progress:start -->
-**Overall:** 4/10 tasks complete (40%). 0/3 studies fully complete.
-**By phase:** Phase 1: 4/8 (50%); Phase 1 (Bonus Track): 0/2 (0%).
+**Overall:** 5/10 tasks complete (50%). 0/3 studies fully complete.
+**By phase:** Phase 1: 4/8 (50%); Phase 1 (Bonus Track): 1/2 (50%).
 
 | Phase | Study | Progress | Score | Missing |
 |---|---|---:|---:|---|
 | Phase 1 | #1 - K's Room, Blade Runner 2049 | `########--` | 3/4 (75%) | Script analysis |
 | Phase 1 | #2 - March House, Little Women | `##--------` | 1/4 (25%) | Color / palette analysis, Hand-drawn scene sketch, Script analysis |
-| Phase 1 (Bonus Track) | Bonus A - Mia & Seb Dinner Fight, La La Land | `----------` | 0/2 (0%) | Motive, Ways to redesign |
+| Phase 1 (Bonus Track) | Bonus A - Mia & Seb Dinner Fight, La La Land | `#####-----` | 1/2 (50%) | Ways to redesign |
 
 Update checkboxes in `PROGRESS.md`, then run `python3 scripts/update_progress.py` to refresh this table. On GitHub, the included workflow refreshes it automatically after pushes to `PROGRESS.md`.
 <!-- progress:end -->
