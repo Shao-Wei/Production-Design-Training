@@ -40,9 +40,11 @@ def study_exists(number: int) -> bool:
     return any(int(study.number) == number for study in studies)
 
 
-def progress_block(number: int, title: str, folder_name: str) -> str:
+def progress_block(number: int, title: str, folder_name: str, phase: str) -> str:
     task_lines = "\n".join(f"- [ ] {task}" for task in TASKS)
     return f"""## Study #{number} - {title}
+
+Phase: {phase}
 
 Folder: `{folder_name}/`
 
@@ -70,7 +72,7 @@ def create_study_file(folder: Path, number: int, title: str) -> Path:
     return study_file
 
 
-def add_study(number: int, title: str, create_folder: bool) -> tuple[Path | None, Path | None]:
+def add_study(number: int, title: str, phase: str, create_folder: bool) -> tuple[Path | None, Path | None]:
     if study_exists(number):
         raise SystemExit(f"Study #{number} already exists in PROGRESS.md.")
 
@@ -84,7 +86,7 @@ def add_study(number: int, title: str, create_folder: bool) -> tuple[Path | None
         study_file = create_study_file(folder, number, title)
 
     with PROGRESS.open("a") as progress_file:
-        progress_file.write("\n\n" + progress_block(number, title, folder_name).rstrip() + "\n")
+        progress_file.write("\n\n" + progress_block(number, title, folder_name, phase).rstrip() + "\n")
 
     update_progress.main()
     return folder if create_folder else None, study_file
@@ -111,6 +113,11 @@ def parse_args() -> argparse.Namespace:
         help="Only add the checklist block; do not create a folder or study file.",
     )
     parser.add_argument(
+        "--phase",
+        default="Phase 1",
+        help='Study phase label. Defaults to "Phase 1".',
+    )
+    parser.add_argument(
         "--dry-run",
         action="store_true",
         help="Preview the study number, folder, and checklist without changing files.",
@@ -122,19 +129,22 @@ def main() -> None:
     args = parse_args()
     number = args.number or next_study_number()
     title = " ".join(args.title).strip()
+    phase = args.phase.strip()
 
     if args.dry_run:
         clean_title = slug_title(title)
         folder_name = f"Scene Study #{number} {clean_title}"
         print(f"Would add Study #{number}: {title}")
+        print(f"Would use phase: {phase}")
         print(f"Would use folder: {folder_name}/")
         print()
-        print(progress_block(number, title, folder_name).rstrip())
+        print(progress_block(number, title, folder_name, phase).rstrip())
         return
 
-    folder, study_file = add_study(number, title, create_folder=not args.no_folder)
+    folder, study_file = add_study(number, title, phase, create_folder=not args.no_folder)
 
     print(f"Added Study #{number}: {title}")
+    print(f"Phase: {phase}")
     if folder is not None:
         print(f"Created folder: {folder.relative_to(ROOT)}")
     if study_file is not None:

@@ -20,6 +20,7 @@ END = "<!-- progress:end -->"
 class Study:
     number: str
     title: str
+    phase: str
     done: int
     total: int
     missing: list[str]
@@ -37,6 +38,7 @@ class Study:
 
 
 HEADING_RE = re.compile(r"^## Study #(\d+)\s*-\s*(.+)$")
+PHASE_RE = re.compile(r"^Phase:\s*(.+)$")
 TASK_RE = re.compile(r"^- \[([ xX])\] (.+)$")
 
 
@@ -44,6 +46,7 @@ def parse_progress(text: str) -> list[Study]:
     studies: list[Study] = []
     current_number: str | None = None
     current_title: str | None = None
+    current_phase = "Phase 1"
     tasks: list[tuple[bool, str]] = []
 
     def flush() -> None:
@@ -52,7 +55,7 @@ def parse_progress(text: str) -> list[Study]:
         total = len(tasks)
         done = sum(1 for checked, _ in tasks if checked)
         missing = [label for checked, label in tasks if not checked]
-        studies.append(Study(current_number, current_title, done, total, missing))
+        studies.append(Study(current_number, current_title, current_phase, done, total, missing))
 
     for line in text.splitlines():
         heading = HEADING_RE.match(line)
@@ -60,7 +63,13 @@ def parse_progress(text: str) -> list[Study]:
             flush()
             current_number = heading.group(1)
             current_title = heading.group(2).strip()
+            current_phase = "Phase 1"
             tasks = []
+            continue
+
+        phase = PHASE_RE.match(line)
+        if phase and current_number is not None:
+            current_phase = phase.group(1).strip()
             continue
 
         task = TASK_RE.match(line)
@@ -79,19 +88,28 @@ def render_scoreboard(studies: list[Study]) -> str:
     total = sum(study.total for study in studies)
     percent = round((completed / total) * 100) if total else 0
     complete_studies = sum(1 for study in studies if study.total and study.done == study.total)
+    phases = sorted({study.phase for study in studies})
+    phase_summary = []
+
+    for phase in phases:
+        phase_done = sum(study.done for study in studies if study.phase == phase)
+        phase_total = sum(study.total for study in studies if study.phase == phase)
+        phase_percent = round((phase_done / phase_total) * 100) if phase_total else 0
+        phase_summary.append(f"{phase}: {phase_done}/{phase_total} ({phase_percent}%)")
 
     lines = [
         f"**Overall:** {completed}/{total} tasks complete ({percent}%). "
         f"{complete_studies}/{len(studies)} studies fully complete.",
+        f"**By phase:** {'; '.join(phase_summary)}.",
         "",
-        "| Study | Progress | Score | Missing |",
-        "|---|---:|---:|---|",
+        "| Phase | Study | Progress | Score | Missing |",
+        "|---|---|---:|---:|---|",
     ]
 
     for study in studies:
         missing = ", ".join(study.missing) if study.missing else "Complete"
         lines.append(
-            f"| #{study.number} - {study.title} | `{study.bar}` | "
+            f"| {study.phase} | #{study.number} - {study.title} | `{study.bar}` | "
             f"{study.done}/{study.total} ({study.percent}%) | {missing} |"
         )
 

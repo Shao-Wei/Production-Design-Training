@@ -22,6 +22,12 @@ Force a specific study number:
 python3 scripts/add_study.py --number 3 "Scene Name, Film Name"
 ```
 
+Set a phase explicitly:
+
+```bash
+python3 scripts/add_study.py --phase "Phase 1" "Scene Name, Film Name"
+```
+
 Add only the checklist block, without creating a folder or study file:
 
 ```bash
@@ -36,13 +42,15 @@ python3 scripts/update_progress.py
 
 On GitHub, the scoreboard refreshes automatically after changes to this file are pushed.
 
-Core checklist:
+Phase 1 checklist:
 - Scene analysis
 - Color / palette analysis
 - Hand-drawn scene sketch
 - Script analysis
 
 ## Study #1 - K's Room, Blade Runner 2049
+
+Phase: Phase 1
 
 Folder: `Scene Study #1 K's Room, Bladerunner2049/`
 
@@ -58,6 +66,8 @@ Notes:
 - Script PDF is uploaded; script analysis still needs to be written.
 
 ## Study #2 - March House, Little Women
+
+Phase: Phase 1
 
 Folder: `Scene Study #2 March House, Little Women/`
 

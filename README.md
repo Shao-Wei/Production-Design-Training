@@ -121,11 +121,12 @@ See `PROGRESS.md` for the editable checklist.
 
 <!-- progress:start -->
 **Overall:** 4/8 tasks complete (50%). 0/2 studies fully complete.
+**By phase:** Phase 1: 4/8 (50%).
 
-| Study | Progress | Score | Missing |
-|---|---:|---:|---|
-| #1 - K's Room, Blade Runner 2049 | `########--` | 3/4 (75%) | Script analysis |
-| #2 - March House, Little Women | `##--------` | 1/4 (25%) | Color / palette analysis, Hand-drawn scene sketch, Script analysis |
+| Phase | Study | Progress | Score | Missing |
+|---|---|---:|---:|---|
+| Phase 1 | #1 - K's Room, Blade Runner 2049 | `########--` | 3/4 (75%) | Script analysis |
+| Phase 1 | #2 - March House, Little Women | `##--------` | 1/4 (25%) | Color / palette analysis, Hand-drawn scene sketch, Script analysis |
 
 Update checkboxes in `PROGRESS.md`, then run `python3 scripts/update_progress.py` to refresh this table. On GitHub, the included workflow refreshes it automatically after pushes to `PROGRESS.md`.
 <!-- progress:end -->
