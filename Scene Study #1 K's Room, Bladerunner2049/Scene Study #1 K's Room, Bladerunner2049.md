@@ -1,5 +1,11 @@
 # Scene Study #1 - K's room in Bladerunner2049
 
+## Reference Images
+
+![K's room wide reference](k-room-wide-reference.png)
+
+![K and Joi dinner reference](k-room-joi-dinner-reference.png)
+
 ## Story
 
 * What is happening emotionally?

@@ -1,5 +1,9 @@
 # Scene Study #2 March House, Little Women (2019)
 
+## Reference Image
+
+![March house breakfast room reference](march-house-breakfast-reference.png)
+
 ## Story
 
 * **What is happening emotionally?**
