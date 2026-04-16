@@ -72,22 +72,22 @@ Recommended default production loop:
 ## Repository Organization
 
 ### Core guidance files
-- `PRODUCTIONDESIGN.md`  
+- `docs/roadmap/PRODUCTIONDESIGN.md`  
   Long-term training philosophy, phases, weekly systems, and skill priorities.
 
-- `SCENECHOICE.md`  
+- `docs/roadmap/SCENECHOICE.md`  
   Comparative 8-study ladder for selecting scenes with intentional contrast.
 
-- `COLORSTUDY.md`  
+- `docs/workflows/COLORSTUDY.md`  
   Detailed palette extraction and Photoshop variation workflow for production-design color thinking.
 
-- `SCRIPTSTUDY.md`  
+- `docs/workflows/SCRIPTSTUDY.md`  
   Practical approach for using short screenplay excerpts in scene analysis.
 
-- `VIDEOLIST.md`  
+- `docs/workflows/VIDEOLIST.md`  
   Research/watch-source suggestions for set breakdowns and craft learning.
 
-- `Scene Study Template.md`  
+- `docs/templates/Scene Study Template.md`  
   Reusable checklist structure for each scene study write-up.
 
 - `PROGRESS.md`  
@@ -106,7 +106,7 @@ Recommended default production loop:
 
 ## How to Use This Workspace
 
-1. Start from `SCENECHOICE.md` to pick the next study type.
+1. Start from `docs/roadmap/SCENECHOICE.md` to pick the next study type.
 2. Run `python3 scripts/add_study.py "Scene Name, Film Name"` to create the next study folder and checklist.
 3. Complete analysis notes first, then color/script/spatial exercises.
 4. Store Blender iterations in `Blender/` or scene-specific subfolders.

@@ -1,0 +1,13 @@
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Local/generated scratch
+.tmp/
+tmp/
+
+# Large 3D practice assets tracked outside Git for now
+Blender/

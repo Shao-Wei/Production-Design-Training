@@ -12,7 +12,7 @@ import update_progress
 
 ROOT = Path(__file__).resolve().parents[1]
 PROGRESS = ROOT / "PROGRESS.md"
-TEMPLATE = ROOT / "Scene Study Template.md"
+TEMPLATE = ROOT / "docs" / "templates" / "Scene Study Template.md"
 
 TASKS = [
     "Scene analysis",
