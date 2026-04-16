@@ -90,6 +90,9 @@ Recommended default production loop:
 - `Scene Study Template.md`  
   Reusable checklist structure for each scene study write-up.
 
+- `PROGRESS.md`  
+  Simple checkbox tracker for each scene study and source for the README scoreboard.
+
 ### Scene study outputs
 - `Scene Study #1 K's Room, Bladerunner2049/`  
   Completed sparse/cold anchor study, including notes and image workflow artifacts.
@@ -104,16 +107,28 @@ Recommended default production loop:
 ## How to Use This Workspace
 
 1. Start from `SCENECHOICE.md` to pick the next study type.
-2. Copy `Scene Study Template.md` into a new scene-study folder.
+2. Run `python3 scripts/add_study.py "Scene Name, Film Name"` to create the next study folder and checklist.
 3. Complete analysis notes first, then color/script/spatial exercises.
 4. Store Blender iterations in `Blender/` or scene-specific subfolders.
-5. Keep each study focused and finishable; prioritize consistency over complexity.
+5. Update `PROGRESS.md` as each study task is finished.
+6. Keep each study focused and finishable; prioritize consistency over complexity.
 
 ## Current Progress Snapshot
 
-- Study #1 complete: Blade Runner 2049 (K’s room)
-- Study #2 complete: Little Women (March house)
-- Next logical steps: continue the ladder with class-contrast or institutional-space studies.
+See `PROGRESS.md` for the editable checklist.
+
+## Scene Study Scoreboard
+
+<!-- progress:start -->
+**Overall:** 4/8 tasks complete (50%). 0/2 studies fully complete.
+
+| Study | Progress | Score | Missing |
+|---|---:|---:|---|
+| #1 - K's Room, Blade Runner 2049 | `########--` | 3/4 (75%) | Script analysis |
+| #2 - March House, Little Women | `##--------` | 1/4 (25%) | Color / palette analysis, Hand-drawn scene sketch, Script analysis |
+
+Update checkboxes in `PROGRESS.md`, then run `python3 scripts/update_progress.py` to refresh this table. On GitHub, the included workflow refreshes it automatically after pushes to `PROGRESS.md`.
+<!-- progress:end -->
 
 ---
 
