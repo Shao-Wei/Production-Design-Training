@@ -94,7 +94,8 @@ Phase: Phase 1 (Bonus Track)
 Folder: `Bonus Scene Study A - Mia & Seb Dinner Fight, La La Land/`
 
 - [x] Motive
-- [ ] Ways to redesign
+- [x] Ways to redesign
+- [ ] Review reference clips
 
 Notes:
 - This is a redesign-focused exercise, not a normal indexed scene study.
