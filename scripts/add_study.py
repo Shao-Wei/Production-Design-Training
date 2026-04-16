@@ -30,14 +30,15 @@ def slug_title(title: str) -> str:
 
 def next_study_number() -> int:
     studies = update_progress.parse_progress(PROGRESS.read_text())
-    if not studies:
+    numbered = [int(study.number) for study in studies if study.number is not None]
+    if not numbered:
         return 1
-    return max(int(study.number) for study in studies) + 1
+    return max(numbered) + 1
 
 
 def study_exists(number: int) -> bool:
     studies = update_progress.parse_progress(PROGRESS.read_text())
-    return any(int(study.number) == number for study in studies)
+    return any(study.number is not None and int(study.number) == number for study in studies)
 
 
 def progress_block(number: int, title: str, folder_name: str, phase: str) -> str:

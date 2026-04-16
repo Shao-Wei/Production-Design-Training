@@ -18,12 +18,14 @@ END = "<!-- progress:end -->"
 
 @dataclass
 class Study:
-    number: str
+    number: str | None
     title: str
     phase: str
     done: int
     total: int
     missing: list[str]
+    kind: str = "study"
+    bonus_index: str | None = None
 
     @property
     def percent(self) -> int:
@@ -36,10 +38,26 @@ class Study:
         filled = round((self.done / self.total) * 10) if self.total else 0
         return "#" * filled + "-" * (10 - filled)
 
+    @property
+    def display_name(self) -> str:
+        if self.kind == "bonus":
+            index = f" {self.bonus_index}" if self.bonus_index else ""
+            return f"Bonus{index} - {self.title}"
+        return f"#{self.number} - {self.title}"
+
 
 HEADING_RE = re.compile(r"^## Study #(\d+)\s*-\s*(.+)$")
+BONUS_HEADING_RE = re.compile(r"^## Bonus Study(?:\s+([A-Z]+))?\s*-\s*(.+)$")
 PHASE_RE = re.compile(r"^Phase:\s*(.+)$")
 TASK_RE = re.compile(r"^- \[([ xX])\] (.+)$")
+
+
+def number_to_letters(number: int) -> str:
+    letters = ""
+    while number:
+        number, remainder = divmod(number - 1, 26)
+        letters = chr(ord("A") + remainder) + letters
+    return letters
 
 
 def parse_progress(text: str) -> list[Study]:
@@ -47,33 +65,72 @@ def parse_progress(text: str) -> list[Study]:
     current_number: str | None = None
     current_title: str | None = None
     current_phase = "Phase 1"
+    current_kind = "study"
+    current_bonus_index: str | None = None
+    bonus_count = 0
     tasks: list[tuple[bool, str]] = []
 
     def flush() -> None:
-        if current_number is None or current_title is None:
+        if current_title is None:
             return
         total = len(tasks)
         done = sum(1 for checked, _ in tasks if checked)
         missing = [label for checked, label in tasks if not checked]
-        studies.append(Study(current_number, current_title, current_phase, done, total, missing))
+        studies.append(
+            Study(
+                current_number,
+                current_title,
+                current_phase,
+                done,
+                total,
+                missing,
+                current_kind,
+                current_bonus_index,
+            )
+        )
 
     for line in text.splitlines():
-        heading = HEADING_RE.match(line)
-        if heading:
+        if line.startswith("## "):
+            heading = HEADING_RE.match(line)
+            if heading:
+                flush()
+                current_number = heading.group(1)
+                current_title = heading.group(2).strip()
+                current_phase = "Phase 1"
+                current_kind = "study"
+                current_bonus_index = None
+                tasks = []
+                continue
+
+            bonus_heading = BONUS_HEADING_RE.match(line)
+            if bonus_heading:
+                flush()
+                bonus_count += 1
+                current_number = None
+                current_bonus_index = bonus_heading.group(1) or number_to_letters(bonus_count)
+                current_title = bonus_heading.group(2).strip()
+                current_phase = "Phase 1 (Bonus Track)"
+                current_kind = "bonus"
+                tasks = []
+                continue
+
+            # Any other level-2 heading ends the current numbered study block.
             flush()
-            current_number = heading.group(1)
-            current_title = heading.group(2).strip()
+            current_number = None
+            current_title = None
             current_phase = "Phase 1"
+            current_kind = "study"
+            current_bonus_index = None
             tasks = []
             continue
 
         phase = PHASE_RE.match(line)
-        if phase and current_number is not None:
+        if phase and current_title is not None:
             current_phase = phase.group(1).strip()
             continue
 
         task = TASK_RE.match(line)
-        if task and current_number is not None:
+        if task and current_title is not None:
             tasks.append((task.group(1).lower() == "x", task.group(2).strip()))
 
     flush()
@@ -109,7 +166,7 @@ def render_scoreboard(studies: list[Study]) -> str:
     for study in studies:
         missing = ", ".join(study.missing) if study.missing else "Complete"
         lines.append(
-            f"| {study.phase} | #{study.number} - {study.title} | `{study.bar}` | "
+            f"| {study.phase} | {study.display_name} | `{study.bar}` | "
             f"{study.done}/{study.total} ({study.percent}%) | {missing} |"
         )
 

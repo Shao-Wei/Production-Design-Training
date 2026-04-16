@@ -48,6 +48,13 @@ Phase 1 checklist:
 - Hand-drawn scene sketch
 - Script analysis
 
+Bonus study rules (Phase 1 add-on):
+- Bonus studies do not use the numbered `Study #` index.
+- Bonus studies use an alphabetic index: `Bonus Study A`, `Bonus Study B`, and so on.
+- Bonus studies can have custom tasks based on the exercise goal.
+- Keep each bonus study in its own folder and track with checkboxes here.
+- Do not use `scripts/add_study.py` for bonus studies.
+
 ## Study #1 - K's Room, Blade Runner 2049
 
 Phase: Phase 1
@@ -79,3 +86,16 @@ Folder: `Scene Study #2 March House, Little Women/`
 Notes:
 - Scene analysis is written in the study folder.
 - Update the remaining checkboxes as those artifacts are added.
+
+## Bonus Study A - Mia & Seb Dinner Fight, La La Land
+
+Phase: Phase 1 (Bonus Track)
+
+Folder: `Bonus Scene Study A - Mia & Seb Dinner Fight, La La Land/`
+
+- [x] Motive
+- [ ] Ways to redesign
+
+Notes:
+- This is a redesign-focused exercise, not a normal indexed scene study.
+- Main direction: emotional shift through gradual dissonance, not a single symbolic blue block.
