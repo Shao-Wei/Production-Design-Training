@@ -60,6 +60,56 @@ This study asks: **How can the same emotional collapse be redesigned so it feels
 - *Blue Valentine* (2010) — conflict externalized through barriers and separation.  
   YouTube: https://www.youtube.com/results?search_query=Blue+Valentine+fight+scene
 
+### Blue Valentine lens-language takeaway (integrated)
+
+The key contrast from *Blue Valentine* is not only color or set dressing, but **camera grammar over time**:
+
+- **Happy/past mode:** wider lenses + handheld movement + shared frames.
+  - Characters can move in and out of each other’s space.
+  - The frame feels alive, permissive, and relational.
+  - Handheld energy adds spontaneity and emotional availability.
+
+- **Sad/present mode:** longer/closer lensing + more static camera + isolating coverage.
+  - Characters are visually compressed and emotionally pinned.
+  - Less frame-sharing means less felt connection.
+  - Stationary camera creates a trapped, procedural, post-romantic tone.
+
+For this *La La Land* redesign, that suggests a progressive camera strategy instead of a sudden symbolic color cue:
+
+- **Early beats:** medium-wide shared two-shots, subtle living movement, breathable negative space.
+- **Middle beats:** reduce shared frame time; move toward tighter over-shoulders and obstructed sightlines.
+- **Break beats:** tighter singles, minimal camera drift, harder stop-start rhythm, less mutual frame entry.
+
+This keeps the emotional fracture readable through **lens distance, frame access, and movement energy**—while preserving *La La Land*’s own visual identity.
+
+### Applied notes from the provided Blue Valentine transcript
+
+Use the transcript insights as **transfer rules**, not as a separate movie analysis:
+
+- **Opportunity narrows over time:**
+  - Start with visual room-to-breathe (wider coverage, shared axis, open blocking lanes).
+  - End with reduced visual options (tighter coverage, fewer exits in frame, blocked pathways).
+
+- **Dynamic life vs sedentary tension:**
+  - Earlier beats can carry small camera life (micro-reframes, slight handheld drift, gentle follow).
+  - Later beats should settle into heavier, less responsive framing to mirror emotional stuckness.
+
+- **Shared frame to split frame as relationship diagnostic:**
+  - In early beats, allow both characters to enter and re-enter each other’s frame naturally.
+  - In break beats, hold them in separate frames longer than usual, with delayed or denied recomposition.
+
+- **Claustrophobia without symbolic set swap:**
+  - Instead of introducing a new “meaning-heavy” blue element, create pressure inside the existing room:
+    - reduce visible window area
+    - favor corners and shallow depth
+    - let practical pools feel smaller and less welcoming
+  - Goal: the room feels like it is closing in through staging and lensing, not decoration shorthand.
+
+- **Observed realism over polished melodrama:**
+  - Favor slightly offset, over-shoulder, or "arrived-late" framings at key argument moments.
+  - Preserve imperfect overlap in movement/dialogue beats where possible.
+  - Keep coverage feeling witnessed rather than theatrically “announced.”
+
 ### La La Land motifs to preserve and then break
 
 Use familiar film language first, then fracture it.
@@ -81,10 +131,10 @@ Use familiar film language first, then fracture it.
 
 ### Beat map for this scene
 
-- **Beat A (start):** warmth, shared frame, fluid rhythm.
-- **Beat B (rise):** reduced saturation, uneven practical contrast, early framing asymmetry.
-- **Beat C (break):** isolated singles, blocked sightlines, static rhythm, mixed-light discomfort.
-- **Beat D (aftershock):** near-neutral low-saturation emptiness instead of symbolic blue dominance.
+- **Beat A (start):** warmth, shared frame, fluid rhythm, medium-wide relational coverage.
+- **Beat B (rise):** reduced saturation, uneven practical contrast, fewer recomposed two-shots.
+- **Beat C (break):** isolated tighter singles, blocked sightlines, static rhythm, mixed-light discomfort.
+- **Beat D (aftershock):** near-neutral low-saturation emptiness, minimal camera response, visual "no-room-left" feeling.
 
 ## Core Design Principle
 
