@@ -117,6 +117,18 @@ Recommended default production loop:
 - `docs/status/ROLLING_SUMMARY.md`
   Generated rolling summary snapshot with retention pointers.
 
+- `docs/status/END_OF_DAY.md`
+  Generated end-session summary and human checklist.
+
+- `docs/status/FALLBACK_SNAPSHOT.md`
+  Generated safety snapshot when a prior session missed the end command.
+
+### Workflow commands
+- Default alias entrypoint: `python3 scripts/workflow_alias.py <alias>`.
+- Common aliases: `resume`, `weekly`, `monthly`, `note`, `end`.
+- Backend scripts: `scripts/resume_now.py`, `scripts/update_progress.py`, `scripts/add_study.py`, `scripts/session.py`.
+- Human commits stay manual; workflow commands never replace review and commit decisions.
+
 ## How to Use This Workspace
 
 1. Start from `docs/roadmap/SCENECHOICE.md` to pick the next study type.
@@ -124,8 +136,9 @@ Recommended default production loop:
 3. Complete analysis notes first, then color/script/spatial exercises.
 4. Store Blender iterations in `Blender/` or scene-specific subfolders.
 5. Update `PROGRESS.md` as each study task is finished.
-6. Run `python3 scripts/resume_now.py --mode now` for a concise "where we left off" recap (optionally add `--learning-note`, `--chat-note`, `--workflow-note`, and `--set-thread` to preserve last-session context).
-7. Keep each study focused and finishable; prioritize consistency over complexity.
+6. Run `python3 scripts/workflow_alias.py resume` for a concise "where we left off" recap.
+7. Run `python3 scripts/workflow_alias.py end` when closing a work block.
+8. Keep each study focused and finishable; prioritize consistency over complexity.
 
 ## Current Progress Snapshot
 

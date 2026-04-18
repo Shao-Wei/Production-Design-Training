@@ -17,8 +17,9 @@ Tracking policy for the recap system:
 - Keep canonical workflow docs and scripts visible to Git; `.gitignore` should only exclude local scratch files, caches, and large practice assets.
 
 Command policy:
-- Alias-first command UX is the long-term preference.
-- Until alias wrappers exist, use the direct Python commands documented in `PROGRESS.md` and `docs/workflows/RESUME.md`.
+- Alias-first command UX is the default for workflow commands.
+- Use `python3 scripts/workflow_alias.py resume`, `weekly`, `monthly`, `note`, and `end`.
+- Direct backend commands remain documented in `docs/workflows/RESUME.md` for debugging and compatibility.
 
 
 ## What to focus on first

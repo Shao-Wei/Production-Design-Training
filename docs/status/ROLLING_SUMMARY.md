@@ -1,6 +1,6 @@
 # Rolling Summary
 
-Generated: 2026-04-18T23:25:13+00:00
+Generated: 2026-04-18T23:43:04+00:00
 
 ## Status
 - Overall: 6/11 tasks complete (55%), 0/3 studies fully complete.
@@ -17,7 +17,7 @@ Generated: 2026-04-18T23:25:13+00:00
 ## Context
 - Last learning focus: Focused on Bonus Study A clip review and redesign questions for the La La Land dinner fight scene.
 - Last chat focus: Discussed bonus-scene direction and asked questions while reviewing reference clips.
-- Recent edits snapshot: docs/status/FALLBACK_SNAPSHOT.md, docs/status/ROLLING_SUMMARY.md, docs/status/RESUME.md, docs/status/END_OF_DAY.md
+- Recent edits snapshot: docs/status/END_OF_DAY.md, docs/status/ROLLING_SUMMARY.md, docs/status/RESUME.md, docs/status/FALLBACK_SNAPSHOT.md
 
 ## Thread Hint
 - Dual-thread requirement: keep planning thread and implementation thread separate once implemented.

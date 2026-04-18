@@ -190,6 +190,38 @@ Checkpoint label: `docs/operating-cadence-and-governance`
 
 ---
 
+## Final Operating Cadence
+
+- Start a session with `python3 scripts/workflow_alias.py resume`.
+- Update learning checkboxes in `PROGRESS.md`; refresh the scoreboard with `python3 scripts/update_progress.py` when needed.
+- Preserve context during a session with `python3 scripts/workflow_alias.py note "..."`.
+- End a work block with `python3 scripts/workflow_alias.py end`.
+- Use `end --weekly` or `end --monthly` when retention compression is due.
+- If `end` is missed, the next resume run writes `docs/status/FALLBACK_SNAPSHOT.md`.
+
+## Command Surface
+
+- Alias wrapper: `scripts/workflow_alias.py`
+- End-session backend: `scripts/session.py`
+- Recap backend: `scripts/resume_now.py`
+- Progress scoreboard backend: `scripts/update_progress.py`
+- Study scaffolding backend: `scripts/add_study.py`
+
+Alias-first is the default for workflow use. Direct backend commands remain valid for verification, debugging, and compatibility.
+
+## Governance
+
+- Work one stage at a time.
+- Repo owner performs manual commits and pushes.
+- Each stage follows: implement, verify, review, then manual commit if approved.
+- Keep learning roadmap docs separate from workflow implementation docs.
+- Keep `PROGRESS.md` focused on scene-study learning progress.
+- Maintain two chat tracks when possible:
+  - Planning thread: roadmap choices, stage decisions, and review gates.
+  - Implementation/Codex thread: code changes, verification, and handoff evidence.
+
+---
+
 ## Stage review template (use before each manual commit)
 
 - Stage goal completed? (yes/no)

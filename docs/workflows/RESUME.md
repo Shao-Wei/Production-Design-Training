@@ -2,6 +2,16 @@
 
 Use this workflow whenever you come back to the project and want a fast recap without loading full chat history.
 
+## Operating Policy
+
+- Prefer alias commands first: `python3 scripts/workflow_alias.py <alias>`.
+- Keep direct backend commands available for debugging and compatibility.
+- Human commits and pushes stay manual after review.
+- Keep learning continuity first; workflow/admin context stays secondary and brief.
+- Maintain two chat tracks when possible:
+  - Planning thread: roadmap choices, stage decisions, and review gates.
+  - Implementation/Codex thread: code changes, verification, and handoff evidence.
+
 ## Command
 
 Alias-first command access is the standing preference. Use the wrapper first:
@@ -132,6 +142,8 @@ If the end command is missed, the next `resume` / `resume_now.py --mode now` run
 
 ## Suggested cadence
 
-- Every session start: run `--mode now`.
-- End of each week: run `--mode weekly`.
-- End of each month: run `--mode monthly`.
+- Every session start: run `resume`.
+- During work: use `note` to preserve learning context when useful.
+- End of each work block: run `end`.
+- End of each week: run `weekly`, or `end --weekly`.
+- End of each month: run `monthly`, or `end --monthly`.
