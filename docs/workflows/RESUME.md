@@ -24,12 +24,18 @@ This generates:
 - `docs/status/ROLLING_SUMMARY.md` (rolling context view)
 - `STATE.json` updates (compact machine-readable memory)
 
-The recap now includes:
-- task scoreboard status and next actions
-- last learning focus (what you were studying/editing)
-- last chat focus + optional thread resume hint
-- recent edit snapshot
-- workflow exploration notes (secondary priority)
+The recap contract keeps these sections stable:
+- Status: task scoreboard and phase progress.
+- Focus: current study and progress delta.
+- Next: up to 3 next actions plus blocker line.
+- Context: learning focus first, then chat focus, recent edits, and workflow notes as secondary context.
+- Thread Hint: current thread reminder plus the dual-thread requirement.
+- Weekly / Monthly retention: current retention windows.
+
+Dual-thread requirement for later implementation:
+- Planning thread: high-level roadmap, stage decisions, and review gates.
+- Implementation thread: code changes, verification, and handoff evidence.
+- Keep these separate when the workflow grows beyond the current single-thread manual command flow.
 
 Then in chat, simply type:
 

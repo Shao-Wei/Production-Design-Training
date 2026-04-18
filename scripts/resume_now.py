@@ -21,10 +21,37 @@ MAX_LEARNING_HISTORY = 20
 MAX_WORKFLOW_HISTORY = 20
 MAX_CHAT_HISTORY = 20
 MAX_RECENT_FILES = 6
+MAX_WEEKLY_RETENTION = 8
+MAX_MONTHLY_RETENTION = 6
+
+MEMORY_CONTRACT: dict[str, Any] = {
+    "version": 1,
+    "artifacts": {
+        "state": "STATE.json",
+        "resume": "docs/status/RESUME.md",
+        "rolling_summary": "docs/status/ROLLING_SUMMARY.md",
+    },
+    "retention": {
+        "weekly_limit": MAX_WEEKLY_RETENTION,
+        "monthly_limit": MAX_MONTHLY_RETENTION,
+    },
+    "context_priority": [
+        "learning_history",
+        "chat_history",
+        "workflow_history",
+    ],
+    "thread_contract": {
+        "dual_thread_required": True,
+        "planning_thread": "",
+        "implementation_thread": "",
+        "note": "Future workflow should preserve separate planning and implementation thread references.",
+    },
+}
 
 DEFAULT_STATE: dict[str, Any] = {
     "schema_version": 1,
     "project": "Production Design",
+    "contract": MEMORY_CONTRACT,
     "updated_at": "",
     "resume": {
         "last_run_at": "",
@@ -84,14 +111,25 @@ def load_state() -> dict[str, Any]:
             if isinstance(loaded.get(key), dict):
                 merged[key].update(loaded[key])
 
+        merged["contract"] = json.loads(json.dumps(MEMORY_CONTRACT))
         return merged
     except json.JSONDecodeError:
         return json.loads(json.dumps(DEFAULT_STATE))
 
 
 def save_state(state: dict[str, Any]) -> None:
+    state["contract"] = json.loads(json.dumps(MEMORY_CONTRACT))
+    enforce_retention_caps(state)
     state["updated_at"] = now_iso()
     STATE_PATH.write_text(json.dumps(state, indent=2) + "\n")
+
+
+def enforce_retention_caps(state: dict[str, Any]) -> None:
+    retention = state.setdefault("retention", {})
+    weekly = retention.setdefault("weekly", [])
+    monthly = retention.setdefault("monthly", [])
+    retention["weekly"] = weekly[-MAX_WEEKLY_RETENTION:]
+    retention["monthly"] = monthly[-MAX_MONTHLY_RETENTION:]
 
 
 def build_status(studies: list[update_progress.Study]) -> dict[str, Any]:
@@ -271,55 +309,77 @@ def render_now_recap(
     recent_files = context.get("recent_files") or []
     recent_files_line = ", ".join(recent_files[:4]) if recent_files else "none"
 
-    bullets = [
-        f"Where you are: {status['overall_tasks_done']}/{status['overall_tasks_total']} tasks complete ({status['overall_percent']}%), {status['studies_complete']}/{status['studies_total']} studies fully complete.",
+    status_bullets = [
+        f"Overall: {status['overall_tasks_done']}/{status['overall_tasks_total']} tasks complete ({status['overall_percent']}%), {status['studies_complete']}/{status['studies_total']} studies fully complete.",
         f"By phase: {phase_line or 'No phase data yet.'}",
+    ]
+
+    focus_bullets = [
         f"Current focus: {active_label}",
-        f"Last learning focus: {latest_learning}",
-        f"Last chat focus: {latest_chat}",
         f"What changed: {progress_delta(state.get('status', {}), status)}",
     ]
 
     next_actions = focus.get("next_actions", [])[:3]
+    next_bullets = []
     for idx, action in enumerate(next_actions, start=1):
-        bullets.append(f"Next {idx}: {action}")
+        next_bullets.append(f"Next {idx}: {action}")
 
     blockers = focus.get("blockers", [])
     if blockers:
-        bullets.append(f"Blocker: {blockers[0]}")
+        next_bullets.append(f"Blocker: {blockers[0]}")
     else:
-        bullets.append("Blocker: none logged.")
+        next_bullets.append("Blocker: none logged.")
 
-    bullets.append(f"Workflow exploration (secondary): {latest_workflow}")
-    bullets.append(f"Recent edits snapshot: {recent_files_line}")
+    context_bullets = [
+        f"Last learning focus: {latest_learning}",
+        f"Last chat focus: {latest_chat}",
+        f"Recent edits snapshot: {recent_files_line}",
+        f"Workflow exploration (secondary): {latest_workflow}",
+    ]
 
     last_thread = (chat.get("last_thread") or "").strip()
     resume_instruction = (chat.get("resume_instruction") or "").strip()
+    thread_bullets = [
+        "Dual-thread requirement: keep planning thread and implementation thread separate once implemented.",
+    ]
     if last_thread:
-        bullets.append(f"Resume last chat thread: {last_thread}")
+        thread_bullets.append(f"Resume last chat thread: {last_thread}")
         if resume_instruction:
-            bullets.append(f"Thread resume hint: {resume_instruction}")
+            thread_bullets.append(f"Thread resume hint: {resume_instruction}")
         else:
-            bullets.append("Thread resume hint: type 'resume thread' and mention this thread id/title.")
+            thread_bullets.append("Thread resume hint: type 'resume thread' and mention this thread id/title.")
 
-    bullets = bullets[:max_bullets]
+    body_bullets = status_bullets + focus_bullets + next_bullets + context_bullets + thread_bullets
+    available_context = max(0, max_bullets - len(status_bullets + focus_bullets + next_bullets + thread_bullets))
+    context_bullets = context_bullets[:available_context]
 
     lines = [
         "# Resume Recap",
         "",
         f"Generated: {now_iso()}",
         "",
-        "## Where we left off",
+        "## Status",
     ]
-    lines.extend(f"- {b}" for b in bullets)
+    lines.extend(f"- {b}" for b in status_bullets)
+    lines.extend(["", "## Focus"])
+    lines.extend(f"- {b}" for b in focus_bullets)
+    lines.extend(["", "## Next"])
+    lines.extend(f"- {b}" for b in next_bullets)
+    lines.extend(["", "## Context"])
+    lines.extend(f"- {b}" for b in context_bullets)
+    lines.extend(["", "## Thread Hint"])
+    lines.extend(f"- {b}" for b in thread_bullets)
     lines.extend(
         [
             "",
             "## Weekly / Monthly retention",
-            "- Weekly memory is compressed and kept to last 8 entries.",
-            "- Monthly memory is consolidated and kept to last 6 entries.",
+            f"- Weekly memory is compressed and kept to last {MAX_WEEKLY_RETENTION} entries.",
+            f"- Monthly memory is consolidated and kept to last {MAX_MONTHLY_RETENTION} entries.",
         ]
     )
+
+    if len(body_bullets) > max_bullets:
+        lines.append("- Lower-priority context was trimmed to keep the recap concise.")
 
     return trim_words("\n".join(lines), max_words)
 
@@ -370,7 +430,7 @@ def add_weekly_entry(state: dict[str, Any], status: dict[str, Any], focus: dict[
     weekly = state.setdefault("retention", {}).setdefault("weekly", [])
     weekly = [item for item in weekly if item.get("week_id") != week_id]
     weekly.append(entry)
-    state["retention"]["weekly"] = weekly[-8:]
+    state["retention"]["weekly"] = weekly[-MAX_WEEKLY_RETENTION:]
 
     return f"Weekly summary updated for {week_id}."
 
@@ -398,7 +458,7 @@ def add_monthly_entry(state: dict[str, Any], status: dict[str, Any], focus: dict
     monthly = state.setdefault("retention", {}).setdefault("monthly", [])
     monthly = [item for item in monthly if item.get("month_id") != month_id]
     monthly.append(entry)
-    state["retention"]["monthly"] = monthly[-6:]
+    state["retention"]["monthly"] = monthly[-MAX_MONTHLY_RETENTION:]
 
     return f"Monthly summary updated for {month_id}."
 
@@ -456,6 +516,7 @@ def main() -> None:
     add_history_entry(state, "chat_history", args.chat_note, MAX_CHAT_HISTORY)
 
     state.setdefault("context", {})["recent_files"] = recent_files_snapshot()
+    enforce_retention_caps(state)
 
     if args.set_thread.strip():
         state.setdefault("chat", {})["last_thread"] = args.set_thread.strip()

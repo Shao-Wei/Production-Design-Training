@@ -1,9 +1,32 @@
 {
   "schema_version": 1,
   "project": "Production Design",
-  "updated_at": "2026-04-18T22:12:01+00:00",
+  "contract": {
+    "version": 1,
+    "artifacts": {
+      "state": "STATE.json",
+      "resume": "docs/status/RESUME.md",
+      "rolling_summary": "docs/status/ROLLING_SUMMARY.md"
+    },
+    "retention": {
+      "weekly_limit": 8,
+      "monthly_limit": 6
+    },
+    "context_priority": [
+      "learning_history",
+      "chat_history",
+      "workflow_history"
+    ],
+    "thread_contract": {
+      "dual_thread_required": true,
+      "planning_thread": "",
+      "implementation_thread": "",
+      "note": "Future workflow should preserve separate planning and implementation thread references."
+    }
+  },
+  "updated_at": "2026-04-18T23:03:42+00:00",
   "resume": {
-    "last_run_at": "2026-04-18T22:12:01+00:00",
+    "last_run_at": "2026-04-18T23:03:42+00:00",
     "last_mode": "now",
     "confidence": 0.85
   },
@@ -89,12 +112,12 @@
       }
     ],
     "recent_files": [
-      "README.md",
       "docs/status/ROLLING_SUMMARY.md",
       "docs/status/RESUME.md",
-      ".gitignore",
-      "PROGRESS.md",
-      "docs/roadmap/PRODUCTIONDESIGN.md"
+      "docs/workflows/RESUME.md",
+      "scripts/resume_now.py",
+      "scripts/add_study.py",
+      "scripts/update_progress.py"
     ]
   },
   "chat": {
