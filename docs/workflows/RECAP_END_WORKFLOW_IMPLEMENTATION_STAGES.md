@@ -24,6 +24,12 @@ Checkpoint label: `chore/policy-baseline-tracking-rules`
 - Confirm `.gitignore` does not exclude canonical workflow state/docs/scripts.
 - Document tracking policy in workflow docs.
 
+### Tracking policy
+- `STATE.json` is canonical workflow state and should stay versioned.
+- `docs/status/RESUME.md` and `docs/status/ROLLING_SUMMARY.md` are canonical recap samples and should stay versioned.
+- Workflow docs under `docs/workflows/` and workflow scripts under `scripts/` are canonical repo files and should stay versioned.
+- `.gitignore` should be limited to local scratch files, caches, and large practice assets; it should not hide canonical workflow state, docs, status samples, or scripts.
+
 ### Checks
 - Run:
   - `python3 scripts/update_progress.py`

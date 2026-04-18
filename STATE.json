@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "project": "Production Design",
+  "updated_at": "2026-04-18T22:12:01+00:00",
+  "resume": {
+    "last_run_at": "2026-04-18T22:12:01+00:00",
+    "last_mode": "now",
+    "confidence": 0.85
+  },
+  "focus": {
+    "active_phase": "Phase 1",
+    "active_study": {
+      "kind": "study",
+      "id": "1",
+      "title": "K's Room, Blade Runner 2049",
+      "folder": "Scene Study #1 K's Room, Blade Runner 2049/"
+    },
+    "next_actions": [
+      "K's Room, Blade Runner 2049: finish Script analysis"
+    ],
+    "blockers": []
+  },
+  "status": {
+    "overall_tasks_done": 6,
+    "overall_tasks_total": 11,
+    "overall_percent": 55,
+    "studies_complete": 0,
+    "studies_total": 3,
+    "phase_summary": [
+      {
+        "phase": "Phase 1",
+        "done": 4,
+        "total": 8,
+        "percent": 50
+      },
+      {
+        "phase": "Phase 1 (Bonus Track)",
+        "done": 2,
+        "total": 3,
+        "percent": 67
+      }
+    ]
+  },
+  "retention": {
+    "weekly": [
+      {
+        "week_id": "2026-W16",
+        "summary": "Week snapshot: 6/11 tasks complete (55%). Active focus: K's Room, Blade Runner 2049",
+        "wins": [
+          "K's Room, Blade Runner 2049: finish Script analysis"
+        ],
+        "carry_forwards": [
+          "K's Room, Blade Runner 2049: finish Script analysis"
+        ],
+        "dropped_items": []
+      }
+    ],
+    "monthly": [
+      {
+        "month_id": "2026-04",
+        "summary": "Monthly snapshot: 6/11 tasks complete (55%), 0/3 studies fully complete.",
+        "theme": "Phase 1",
+        "completed": [
+          "6 tasks marked complete"
+        ],
+        "next_month_priorities": [
+          "K's Room, Blade Runner 2049: finish Script analysis"
+        ]
+      }
+    ]
+  },
+  "context": {
+    "learning_history": [
+      {
+        "at": "2026-04-18T20:19:50+00:00",
+        "text": "Focused on Bonus Study A clip review and redesign questions for the La La Land dinner fight scene."
+      }
+    ],
+    "workflow_history": [
+      {
+        "at": "2026-04-18T20:19:50+00:00",
+        "text": "Implemented scoreboard and resume automation; next explore smarter context extraction and workflow enhancements."
+      }
+    ],
+    "chat_history": [
+      {
+        "at": "2026-04-18T20:19:50+00:00",
+        "text": "Discussed bonus-scene direction and asked questions while reviewing reference clips."
+      }
+    ],
+    "recent_files": [
+      "README.md",
+      "docs/status/ROLLING_SUMMARY.md",
+      "docs/status/RESUME.md",
+      ".gitignore",
+      "PROGRESS.md",
+      "docs/roadmap/PRODUCTIONDESIGN.md"
+    ]
+  },
+  "chat": {
+    "last_thread": "Production Design thread - 2026-04-18",
+    "resume_instruction": "In chat, ask: resume thread Production Design thread - 2026-04-18"
+  }
+}

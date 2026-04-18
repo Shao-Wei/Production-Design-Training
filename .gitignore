@@ -9,5 +9,31 @@ __pycache__/
 .tmp/
 tmp/
 
+# Local environment and logs
+.env
+.env.*
+!.env.example
+*.log
+
+# Python local tooling
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Local-only workflow scratch
+STATE.local.json
+docs/status/*.local.md
+docs/status/PRIVATE*.md
+docs/status/tmp/
+docs/status/archive-local/
+
+# Canonical workflow state, docs, status samples, and scripts are intentionally
+# not ignored: STATE.json, docs/status/RESUME.md,
+# docs/status/ROLLING_SUMMARY.md, docs/workflows/, and scripts/.
+
 # Large 3D practice assets tracked outside Git for now
 Blender/

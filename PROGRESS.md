@@ -4,6 +4,8 @@ Edit this file when a study moves forward. GitHub renders these as task checkbox
 
 ## Progress Commands
 
+Alias-first command UX is the long-term preference. Until alias wrappers are implemented, use these direct Python commands.
+
 Start the next study:
 
 ```bash
@@ -38,6 +40,34 @@ Refresh the README scoreboard after editing checkboxes by hand:
 
 ```bash
 python3 scripts/update_progress.py
+```
+
+Generate a concise resume recap for chat:
+
+```bash
+python3 scripts/resume_now.py --mode now
+```
+
+Capture what you were learning/chatting about for better next-session reminders:
+
+```bash
+python3 scripts/resume_now.py --mode now \
+	--learning-note "Focused on Bonus Study A clip review" \
+	--chat-note "Asked redesign questions about emotional progression" \
+	--workflow-note "Exploring next workflow automation ideas" \
+	--set-thread "Production Design thread - 2026-04-18"
+```
+
+Run weekly memory compression:
+
+```bash
+python3 scripts/resume_now.py --mode weekly
+```
+
+Run monthly memory consolidation:
+
+```bash
+python3 scripts/resume_now.py --mode monthly
 ```
 
 On GitHub, the scoreboard refreshes automatically after changes to this file are pushed.

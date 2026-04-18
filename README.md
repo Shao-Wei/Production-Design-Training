@@ -107,6 +107,16 @@ Recommended default production loop:
 - `Blender/`  
   Blender files and material practice assets for environment studies.
 
+### Session memory files
+- `STATE.json`
+  Compact machine-readable memory for current focus, status, and weekly/monthly retention.
+
+- `docs/status/RESUME.md`
+  Generated recap for manual "resume now" chat flow.
+
+- `docs/status/ROLLING_SUMMARY.md`
+  Generated rolling summary snapshot with retention pointers.
+
 ## How to Use This Workspace
 
 1. Start from `docs/roadmap/SCENECHOICE.md` to pick the next study type.
@@ -114,7 +124,8 @@ Recommended default production loop:
 3. Complete analysis notes first, then color/script/spatial exercises.
 4. Store Blender iterations in `Blender/` or scene-specific subfolders.
 5. Update `PROGRESS.md` as each study task is finished.
-6. Keep each study focused and finishable; prioritize consistency over complexity.
+6. Run `python3 scripts/resume_now.py --mode now` for a concise "where we left off" recap (optionally add `--learning-note`, `--chat-note`, `--workflow-note`, and `--set-thread` to preserve last-session context).
+7. Keep each study focused and finishable; prioritize consistency over complexity.
 
 ## Current Progress Snapshot
 

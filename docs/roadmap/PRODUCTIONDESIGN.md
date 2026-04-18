@@ -11,6 +11,15 @@ This section tracks the staged implementation plan for recap/workflow automation
 Detailed execution checklist and stage-level verification tasks are maintained in:
 - `docs/workflows/RECAP_END_WORKFLOW_IMPLEMENTATION_STAGES.md`
 
+Tracking policy for the recap system:
+- Keep `STATE.json` versioned as compact workflow state.
+- Keep generated recap samples versioned at `docs/status/RESUME.md` and `docs/status/ROLLING_SUMMARY.md`.
+- Keep canonical workflow docs and scripts visible to Git; `.gitignore` should only exclude local scratch files, caches, and large practice assets.
+
+Command policy:
+- Alias-first command UX is the long-term preference.
+- Until alias wrappers exist, use the direct Python commands documented in `PROGRESS.md` and `docs/workflows/RESUME.md`.
+
 
 ## What to focus on first
 

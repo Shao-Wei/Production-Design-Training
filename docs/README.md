@@ -12,6 +12,8 @@ This folder keeps workflow notes, roadmap references, and reusable templates out
 - `workflows/COLORSTUDY.md` - palette extraction and color-variation workflow.
 - `workflows/SCRIPTSTUDY.md` - screenplay excerpt and script-to-space analysis workflow.
 - `workflows/VIDEOLIST.md` - research/watch-source suggestions for set breakdowns and craft learning.
+- `workflows/RESUME.md` - manual "resume now" recap workflow and memory-retention routine.
+- `workflows/RECAP_END_WORKFLOW_IMPLEMENTATION_STAGES.md` - detailed staged implementation plan for recap/end workflow enhancements.
 
 ## Templates
 
