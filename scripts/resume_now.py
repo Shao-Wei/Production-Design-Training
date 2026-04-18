@@ -16,6 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 STATE_PATH = ROOT / "STATE.json"
 RESUME_PATH = ROOT / "docs" / "status" / "RESUME.md"
 ROLLING_PATH = ROOT / "docs" / "status" / "ROLLING_SUMMARY.md"
+FALLBACK_PATH = ROOT / "docs" / "status" / "FALLBACK_SNAPSHOT.md"
 
 MAX_LEARNING_HISTORY = 20
 MAX_WORKFLOW_HISTORY = 20
@@ -30,6 +31,7 @@ MEMORY_CONTRACT: dict[str, Any] = {
         "state": "STATE.json",
         "resume": "docs/status/RESUME.md",
         "rolling_summary": "docs/status/ROLLING_SUMMARY.md",
+        "fallback_snapshot": "docs/status/FALLBACK_SNAPSHOT.md",
     },
     "retention": {
         "weekly_limit": MAX_WEEKLY_RETENTION,
@@ -91,6 +93,15 @@ DEFAULT_STATE: dict[str, Any] = {
         "last_thread": "",
         "resume_instruction": "",
     },
+    "end_session": {
+        "last_end_at": "",
+        "last_summary": "",
+        "last_steps": [],
+        "fallback_needed": False,
+        "last_fallback_at": "",
+        "last_fallback_for_resume_at": "",
+        "last_fallback_snapshot": "",
+    },
 }
 
 
@@ -107,7 +118,7 @@ def load_state() -> dict[str, Any]:
         merged = json.loads(json.dumps(DEFAULT_STATE))
         merged.update(loaded)
 
-        for key in ("resume", "focus", "status", "retention", "context", "chat"):
+        for key in ("resume", "focus", "status", "retention", "context", "chat", "end_session"):
             if isinstance(loaded.get(key), dict):
                 merged[key].update(loaded[key])
 
@@ -409,6 +420,64 @@ def update_rolling_summary(state: dict[str, Any], recap: str) -> None:
     ROLLING_PATH.write_text(content + "\n")
 
 
+def create_fallback_snapshot_if_needed(state: dict[str, Any]) -> str:
+    resume = state.get("resume", {})
+    end_session = state.setdefault("end_session", {})
+    last_resume = (resume.get("last_run_at") or "").strip()
+    last_end = (end_session.get("last_end_at") or "").strip()
+    last_fallback_for_resume = (end_session.get("last_fallback_for_resume_at") or "").strip()
+
+    if not last_resume:
+        return ""
+    if last_fallback_for_resume == last_resume:
+        return ""
+    if last_end and last_end >= last_resume:
+        end_session["fallback_needed"] = False
+        return ""
+
+    status = state.get("status", {})
+    focus = state.get("focus", {})
+    active = focus.get("active_study", {})
+    context = state.get("context", {})
+    learning_history = context.get("learning_history") or []
+    latest_learning = learning_history[-1]["text"] if learning_history else "No learning note saved yet."
+    next_actions = focus.get("next_actions", [])
+
+    lines = [
+        "# Fallback Snapshot",
+        "",
+        f"Generated: {now_iso()}",
+        "",
+        "## Why this exists",
+        "- Previous session did not record an end-session summary, so this safety snapshot preserves the last known resume state.",
+        "",
+        "## Last Known Learning State",
+        f"- Focus: {active.get('title', 'n/a')} ({focus.get('active_phase', 'n/a')})",
+        f"- Progress: {status.get('overall_tasks_done', 0)}/{status.get('overall_tasks_total', 0)} tasks complete ({status.get('overall_percent', 0)}%).",
+        f"- Last learning focus: {latest_learning}",
+        "",
+        "## Next Actions",
+    ]
+    lines.extend(f"- {action}" for action in next_actions[:3])
+    if not next_actions:
+        lines.append("- Pick the next concrete learning action.")
+    lines.extend(
+        [
+            "",
+            "## Thread Handling",
+            "- Keep planning thread and implementation/Codex thread separate.",
+        ]
+    )
+
+    FALLBACK_PATH.parent.mkdir(parents=True, exist_ok=True)
+    FALLBACK_PATH.write_text("\n".join(lines) + "\n")
+    end_session["fallback_needed"] = True
+    end_session["last_fallback_at"] = now_iso()
+    end_session["last_fallback_for_resume_at"] = last_resume
+    end_session["last_fallback_snapshot"] = str(FALLBACK_PATH.relative_to(ROOT))
+    return str(FALLBACK_PATH.relative_to(ROOT))
+
+
 def add_weekly_entry(state: dict[str, Any], status: dict[str, Any], focus: dict[str, Any], max_words: int) -> str:
     today = datetime.now(timezone.utc)
     week_id = f"{today.isocalendar().year}-W{today.isocalendar().week:02d}"
@@ -506,6 +575,11 @@ def parse_args() -> argparse.Namespace:
 def main() -> None:
     args = parse_args()
     state = load_state()
+    fallback_message = ""
+    if args.mode == "now":
+        fallback_path = create_fallback_snapshot_if_needed(state)
+        if fallback_path:
+            fallback_message = f"Fallback snapshot written to {fallback_path}"
 
     studies = update_progress.parse_progress((ROOT / "PROGRESS.md").read_text())
     status = build_status(studies)
@@ -543,6 +617,8 @@ def main() -> None:
     state["focus"] = focus
     save_state(state)
 
+    if fallback_message:
+        print(fallback_message)
     print(message)
     if args.mode == "now":
         print(recap)

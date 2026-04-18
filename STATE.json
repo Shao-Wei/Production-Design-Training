@@ -6,7 +6,8 @@
     "artifacts": {
       "state": "STATE.json",
       "resume": "docs/status/RESUME.md",
-      "rolling_summary": "docs/status/ROLLING_SUMMARY.md"
+      "rolling_summary": "docs/status/ROLLING_SUMMARY.md",
+      "fallback_snapshot": "docs/status/FALLBACK_SNAPSHOT.md"
     },
     "retention": {
       "weekly_limit": 8,
@@ -24,10 +25,10 @@
       "note": "Future workflow should preserve separate planning and implementation thread references."
     }
   },
-  "updated_at": "2026-04-18T23:14:31+00:00",
+  "updated_at": "2026-04-18T23:25:13+00:00",
   "resume": {
-    "last_run_at": "2026-04-18T23:14:31+00:00",
-    "last_mode": "monthly",
+    "last_run_at": "2026-04-18T23:25:13+00:00",
+    "last_mode": "now",
     "confidence": 0.85
   },
   "focus": {
@@ -112,16 +113,34 @@
       }
     ],
     "recent_files": [
+      "docs/status/FALLBACK_SNAPSHOT.md",
       "docs/status/ROLLING_SUMMARY.md",
       "docs/status/RESUME.md",
-      "docs/workflows/RESUME.md",
-      "scripts/workflow_alias.py",
-      "scripts/resume_now.py",
-      "scripts/add_study.py"
+      "docs/status/END_OF_DAY.md",
+      "scripts/session.py",
+      "docs/workflows/RESUME.md"
     ]
   },
   "chat": {
     "last_thread": "Production Design thread - 2026-04-18",
     "resume_instruction": "In chat, ask: resume thread Production Design thread - 2026-04-18"
+  },
+  "end_session": {
+    "last_end_at": "2026-04-18T23:25:13+00:00",
+    "last_summary": "docs/status/END_OF_DAY.md",
+    "last_steps": [
+      {
+        "label": "progress refresh",
+        "exit_code": 0
+      },
+      {
+        "label": "recap update",
+        "exit_code": 0
+      }
+    ],
+    "fallback_needed": false,
+    "last_fallback_at": "2026-04-18T23:25:13+00:00",
+    "last_fallback_for_resume_at": "2026-04-18T23:25:13+00:00",
+    "last_fallback_snapshot": "docs/status/FALLBACK_SNAPSHOT.md"
   }
 }

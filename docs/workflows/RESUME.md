@@ -82,7 +82,7 @@ python3 scripts/resume_now.py --mode monthly
 - `note "..."` -> `python3 scripts/resume_now.py --mode now --learning-note "..."`
 - `note --learning-note "..." --chat-note "..." --workflow-note "..." --thread-hint "..."`
   forwards note and thread arguments to `resume_now.py --mode now`.
-- `end` is reserved for Stage 6 and currently returns an explicit "not available yet" message.
+- `end` -> `python3 scripts/session.py`
 
 Examples:
 
@@ -94,6 +94,35 @@ python3 scripts/workflow_alias.py note "Focused on Study #1 script analysis"
 python3 scripts/workflow_alias.py note --chat-note "Discussed scene contrast"
 python3 scripts/workflow_alias.py end
 ```
+
+## End Session
+
+Use the end-session command when closing a work block:
+
+```bash
+python3 scripts/workflow_alias.py end
+```
+
+This runs:
+- `python3 scripts/update_progress.py`
+- `python3 scripts/resume_now.py --mode now`
+- optional retention commands when requested with `--weekly` or `--monthly`
+
+Optional retention examples:
+
+```bash
+python3 scripts/workflow_alias.py end --weekly
+python3 scripts/workflow_alias.py end --monthly
+```
+
+This writes:
+- `docs/status/END_OF_DAY.md` with maintenance results, learning continuity, thread handling, and a human checklist.
+- `docs/status/RESUME.md` and `docs/status/ROLLING_SUMMARY.md` through the recap backend.
+- `STATE.json` with the latest end-session record.
+
+The human checklist includes manual commit, planning-thread rename/update, implementation/Codex-thread rename/update, and next-session resume steps.
+
+If the end command is missed, the next `resume` / `resume_now.py --mode now` run writes `docs/status/FALLBACK_SNAPSHOT.md` before updating the current recap. The fallback snapshot preserves the last known learning focus and next actions so the next session has a safety handoff.
 
 ## Brevity Policy
 

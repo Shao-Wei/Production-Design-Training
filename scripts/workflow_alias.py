@@ -10,13 +10,14 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 RESUME_NOW = ROOT / "scripts" / "resume_now.py"
+SESSION = ROOT / "scripts" / "session.py"
 
 ALIASES = {
     "resume": "Generate the current resume recap.",
     "weekly": "Run weekly memory compression.",
     "monthly": "Run monthly memory consolidation.",
     "note": "Capture a quick learning note, or forward resume_now note flags.",
-    "end": "Reserved for Stage 6 end-session flow.",
+    "end": "Run end-session maintenance and write the checklist.",
 }
 
 
@@ -29,17 +30,23 @@ def print_help() -> None:
     print("  monthly [args]  -> python3 scripts/resume_now.py --mode monthly [args]")
     print("  note <text>     -> python3 scripts/resume_now.py --mode now --learning-note <text>")
     print("  note [flags]    -> python3 scripts/resume_now.py --mode now [flags]")
-    print("  end             -> not available until Stage 6")
+    print("  end [args]      -> python3 scripts/session.py [args]")
     print()
     print("Examples:")
     print("  python3 scripts/workflow_alias.py resume")
     print("  python3 scripts/workflow_alias.py weekly")
     print("  python3 scripts/workflow_alias.py note \"Reviewed K's room script cues\"")
     print("  python3 scripts/workflow_alias.py note --chat-note \"Discussed scene contrast\"")
+    print("  python3 scripts/workflow_alias.py end --weekly")
 
 
 def run_resume_now(mode: str, args: list[str]) -> int:
     command = [sys.executable, str(RESUME_NOW), "--mode", mode, *args]
+    return subprocess.run(command, cwd=ROOT).returncode
+
+
+def run_session(args: list[str]) -> int:
+    command = [sys.executable, str(SESSION), *args]
     return subprocess.run(command, cwd=ROOT).returncode
 
 
@@ -72,8 +79,7 @@ def main(argv: list[str] | None = None) -> int:
     if alias == "note":
         return run_note(rest)
     if alias == "end":
-        print("The 'end' alias is not available yet. It is reserved for Stage 6 end-session flow.")
-        return 2
+        return run_session(rest)
 
     print(f"error: unknown alias '{alias}'.", file=sys.stderr)
     print(f"Known aliases: {', '.join(ALIASES)}", file=sys.stderr)
