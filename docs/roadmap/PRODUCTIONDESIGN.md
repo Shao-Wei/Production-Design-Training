@@ -4,6 +4,14 @@ Since this is an after-work side project, the best path is not “learn everythi
 
 **study scenes → analyze why they work → design your own version → build visual proof of skill over time.**
 
+## Workflow Implementation Roadmap (Recap System)
+
+This section tracks the staged implementation plan for recap/workflow automation in this repo.
+
+Detailed execution checklist and stage-level verification tasks are maintained in:
+- `docs/workflows/RECAP_END_WORKFLOW_IMPLEMENTATION_STAGES.md`
+
+
 ## What to focus on first
 
 Build these 6 abilities:
