@@ -23,22 +23,51 @@ TASKS = [
 
 
 def slug_title(title: str) -> str:
-    cleaned = re.sub(r'[\\/:*?"<>|]', "", title).strip()
+    cleaned = re.sub(r"[\x00-\x1f]", "", title)
+    cleaned = re.sub(r'[\\/:*?"<>|]', "", cleaned).strip()
     cleaned = re.sub(r"\s+", " ", cleaned)
+    cleaned = cleaned.strip(". ")
     return cleaned or "Untitled Scene"
 
 
-def next_study_number() -> int:
+def progress_studies() -> list[update_progress.Study]:
     studies = update_progress.parse_progress(PROGRESS.read_text())
+    return [study for study in studies if study.kind == "study"]
+
+
+def next_study_number() -> int:
+    studies = progress_studies()
     numbered = [int(study.number) for study in studies if study.number is not None]
     if not numbered:
         return 1
     return max(numbered) + 1
 
 
-def study_exists(number: int) -> bool:
-    studies = update_progress.parse_progress(PROGRESS.read_text())
-    return any(study.number is not None and int(study.number) == number for study in studies)
+def validate_study_number(number: int) -> None:
+    if number < 1:
+        raise SystemExit("Study number must be 1 or greater.")
+
+    if any(study.number is not None and int(study.number) == number for study in progress_studies()):
+        raise SystemExit(f"Study #{number} already exists in PROGRESS.md.")
+
+
+def build_folder_name(number: int, title: str) -> str:
+    return f"Scene Study #{number} {slug_title(title)}"
+
+
+def validate_new_study(number: int, title: str, create_folder: bool) -> str:
+    if not title.strip():
+        raise SystemExit("Study title cannot be blank.")
+
+    validate_study_number(number)
+    folder_name = build_folder_name(number, title)
+
+    if create_folder:
+        folder = ROOT / folder_name
+        if folder.exists():
+            raise SystemExit(f"Folder already exists: {folder_name}/")
+
+    return folder_name
 
 
 def progress_block(number: int, title: str, folder_name: str, phase: str) -> str:
@@ -59,7 +88,7 @@ Notes:
 def create_study_file(folder: Path, number: int, title: str) -> Path:
     study_file = folder / f"{folder.name}.md"
     if study_file.exists():
-        return study_file
+        raise SystemExit(f"Study file already exists: {study_file.relative_to(ROOT)}")
 
     text = TEMPLATE.read_text()
     text = re.sub(
@@ -74,11 +103,7 @@ def create_study_file(folder: Path, number: int, title: str) -> Path:
 
 
 def add_study(number: int, title: str, phase: str, create_folder: bool) -> tuple[Path | None, Path | None]:
-    if study_exists(number):
-        raise SystemExit(f"Study #{number} already exists in PROGRESS.md.")
-
-    clean_title = slug_title(title)
-    folder_name = f"Scene Study #{number} {clean_title}"
+    folder_name = validate_new_study(number, title, create_folder)
     folder = ROOT / folder_name
     study_file: Path | None = None
 
@@ -133,11 +158,13 @@ def main() -> None:
     phase = args.phase.strip()
 
     if args.dry_run:
-        clean_title = slug_title(title)
-        folder_name = f"Scene Study #{number} {clean_title}"
+        folder_name = validate_new_study(number, title, create_folder=not args.no_folder)
         print(f"Would add Study #{number}: {title}")
         print(f"Would use phase: {phase}")
-        print(f"Would use folder: {folder_name}/")
+        if args.no_folder:
+            print("Would not create a folder or study file.")
+        else:
+            print(f"Would use folder: {folder_name}/")
         print()
         print(progress_block(number, title, folder_name, phase).rstrip())
         return
