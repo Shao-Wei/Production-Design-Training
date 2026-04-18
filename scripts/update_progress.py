@@ -46,10 +46,17 @@ class Study:
         return f"#{self.number} - {self.title}"
 
 
-HEADING_RE = re.compile(r"^## Study #(\d+)\s*-\s*(.+)$")
-BONUS_HEADING_RE = re.compile(r"^## Bonus Study(?:\s+([A-Z]+))?\s*-\s*(.+)$")
-PHASE_RE = re.compile(r"^Phase:\s*(.+)$")
-TASK_RE = re.compile(r"^- \[([ xX])\] (.+)$")
+LEVEL_TWO_HEADING_RE = re.compile(r"^\s*##(?!#)\s+")
+HEADING_RE = re.compile(
+    r"^\s*##\s+Study\s*#\s*(\d+)\s*[-:]\s*(.+?)\s*$",
+    re.IGNORECASE,
+)
+BONUS_HEADING_RE = re.compile(
+    r"^\s*##\s+Bonus\s+Study(?:\s+([A-Z]+))?\s*[-:]\s*(.+?)\s*$",
+    re.IGNORECASE,
+)
+PHASE_RE = re.compile(r"^\s*Phase\s*:\s*(.+?)\s*$", re.IGNORECASE)
+TASK_RE = re.compile(r"^\s*-\s*\[([ xX])\]\s+(.+?)\s*$")
 
 
 def number_to_letters(number: int) -> str:
@@ -90,7 +97,7 @@ def parse_progress(text: str) -> list[Study]:
         )
 
     for line in text.splitlines():
-        if line.startswith("## "):
+        if LEVEL_TWO_HEADING_RE.match(line):
             heading = HEADING_RE.match(line)
             if heading:
                 flush()
@@ -107,7 +114,11 @@ def parse_progress(text: str) -> list[Study]:
                 flush()
                 bonus_count += 1
                 current_number = None
-                current_bonus_index = bonus_heading.group(1) or number_to_letters(bonus_count)
+                current_bonus_index = (
+                    bonus_heading.group(1).upper()
+                    if bonus_heading.group(1)
+                    else number_to_letters(bonus_count)
+                )
                 current_title = bonus_heading.group(2).strip()
                 current_phase = "Phase 1 (Bonus Track)"
                 current_kind = "bonus"
@@ -182,6 +193,13 @@ def render_scoreboard(studies: list[Study]) -> str:
 
 
 def update_readme(readme_text: str, scoreboard: str) -> str:
+    start_count = readme_text.count(START)
+    end_count = readme_text.count(END)
+    if start_count != end_count:
+        raise ValueError("README progress markers are unbalanced.")
+    if start_count > 1:
+        raise ValueError("README progress markers are duplicated.")
+
     block_re = re.compile(
         rf"{re.escape(START)}.*?{re.escape(END)}",
         re.DOTALL,
@@ -202,7 +220,10 @@ def update_readme(readme_text: str, scoreboard: str) -> str:
 def main() -> None:
     studies = parse_progress(PROGRESS.read_text())
     scoreboard = render_scoreboard(studies)
-    README.write_text(update_readme(README.read_text(), scoreboard))
+    readme_text = README.read_text()
+    updated = update_readme(readme_text, scoreboard)
+    if updated != readme_text:
+        README.write_text(updated)
 
 
 if __name__ == "__main__":
