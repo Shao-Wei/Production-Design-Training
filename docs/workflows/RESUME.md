@@ -4,6 +4,14 @@ Use this workflow whenever you come back to the project and want a fast recap wi
 
 ## Command
 
+Alias-first command access is the standing preference. Use the wrapper first:
+
+```bash
+python3 scripts/workflow_alias.py resume
+```
+
+Direct backend command:
+
 ```bash
 python3 scripts/resume_now.py --mode now
 ```
@@ -50,13 +58,41 @@ and paste `docs/status/RESUME.md` if needed.
 Weekly compression:
 
 ```bash
-python3 scripts/resume_now.py --mode weekly
+python3 scripts/workflow_alias.py weekly
 ```
 
 Monthly consolidation:
 
 ```bash
+python3 scripts/workflow_alias.py monthly
+```
+
+Direct backend commands still work:
+
+```bash
+python3 scripts/resume_now.py --mode weekly
 python3 scripts/resume_now.py --mode monthly
+```
+
+## Alias Map
+
+- `resume` -> `python3 scripts/resume_now.py --mode now`
+- `weekly` -> `python3 scripts/resume_now.py --mode weekly`
+- `monthly` -> `python3 scripts/resume_now.py --mode monthly`
+- `note "..."` -> `python3 scripts/resume_now.py --mode now --learning-note "..."`
+- `note --learning-note "..." --chat-note "..." --workflow-note "..." --thread-hint "..."`
+  forwards note and thread arguments to `resume_now.py --mode now`.
+- `end` is reserved for Stage 6 and currently returns an explicit "not available yet" message.
+
+Examples:
+
+```bash
+python3 scripts/workflow_alias.py resume
+python3 scripts/workflow_alias.py weekly
+python3 scripts/workflow_alias.py monthly
+python3 scripts/workflow_alias.py note "Focused on Study #1 script analysis"
+python3 scripts/workflow_alias.py note --chat-note "Discussed scene contrast"
+python3 scripts/workflow_alias.py end
 ```
 
 ## Brevity Policy

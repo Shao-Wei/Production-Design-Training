@@ -24,10 +24,10 @@
       "note": "Future workflow should preserve separate planning and implementation thread references."
     }
   },
-  "updated_at": "2026-04-18T23:03:42+00:00",
+  "updated_at": "2026-04-18T23:14:31+00:00",
   "resume": {
-    "last_run_at": "2026-04-18T23:03:42+00:00",
-    "last_mode": "now",
+    "last_run_at": "2026-04-18T23:14:31+00:00",
+    "last_mode": "monthly",
     "confidence": 0.85
   },
   "focus": {
@@ -115,9 +115,9 @@
       "docs/status/ROLLING_SUMMARY.md",
       "docs/status/RESUME.md",
       "docs/workflows/RESUME.md",
+      "scripts/workflow_alias.py",
       "scripts/resume_now.py",
-      "scripts/add_study.py",
-      "scripts/update_progress.py"
+      "scripts/add_study.py"
     ]
   },
   "chat": {
