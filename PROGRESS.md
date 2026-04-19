@@ -66,7 +66,7 @@ Folder: `Scene Study #1 K's Room, Bladerunner2049/`
 - [x] Scene analysis
 - [x] Color / palette analysis
 - [x] Hand-drawn scene sketch
-- [ ] Script analysis
+- [x] Script analysis
 
 Notes:
 - Scene analysis is written in the study folder.

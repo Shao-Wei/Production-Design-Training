@@ -10,9 +10,9 @@ For this study, I would include:
 
 Then annotate it:
 
-* underline words that imply space
-* circle words that imply props
-* box words that imply character psychology
+* underline words that imply **space**
+* circle words that imply **props**
+* box words that imply **character psychology**
 * mark where the final film adds more than the script directly states
 
 Take the script excerpt and write:

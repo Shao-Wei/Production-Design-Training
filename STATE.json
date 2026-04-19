@@ -25,9 +25,9 @@
       "note": "Future workflow should preserve separate planning and implementation thread references."
     }
   },
-  "updated_at": "2026-04-19T23:08:57+00:00",
+  "updated_at": "2026-04-19T23:23:30+00:00",
   "resume": {
-    "last_run_at": "2026-04-19T23:08:57+00:00",
+    "last_run_at": "2026-04-19T23:23:30+00:00",
     "last_mode": "now",
     "confidence": 0.85
   },
@@ -35,27 +35,29 @@
     "active_phase": "Phase 1",
     "active_study": {
       "kind": "study",
-      "id": "1",
-      "title": "K's Room, Blade Runner 2049",
-      "folder": "Scene Study #1 K's Room, Blade Runner 2049/"
+      "id": "2",
+      "title": "March House, Little Women",
+      "folder": "Scene Study #2 March House, Little Women/"
     },
     "next_actions": [
-      "K's Room, Blade Runner 2049: finish Script analysis"
+      "March House, Little Women: finish Color / palette analysis",
+      "March House, Little Women: finish Hand-drawn scene sketch",
+      "March House, Little Women: finish Script analysis"
     ],
     "blockers": []
   },
   "status": {
-    "overall_tasks_done": 7,
+    "overall_tasks_done": 8,
     "overall_tasks_total": 11,
-    "overall_percent": 64,
-    "studies_complete": 1,
+    "overall_percent": 73,
+    "studies_complete": 2,
     "studies_total": 3,
     "phase_summary": [
       {
         "phase": "Phase 1",
-        "done": 4,
+        "done": 5,
         "total": 8,
-        "percent": 50
+        "percent": 62
       },
       {
         "phase": "Phase 1 (Bonus Track)",
@@ -113,12 +115,12 @@
       }
     ],
     "recent_files": [
-      "docs/status/FALLBACK_SNAPSHOT.md",
       "README.md",
       "PROGRESS.md",
+      "docs/workflows/SCRIPTSTUDY.md",
+      "docs/status/END_OF_DAY.md",
       "docs/status/ROLLING_SUMMARY.md",
-      "docs/status/RESUME.md",
-      "docs/status/END_OF_DAY.md"
+      "docs/status/RESUME.md"
     ]
   },
   "chat": {
@@ -126,7 +128,7 @@
     "resume_instruction": "In chat, ask: resume thread Production Design thread - 2026-04-18"
   },
   "end_session": {
-    "last_end_at": "2026-04-19T23:08:57+00:00",
+    "last_end_at": "2026-04-19T23:23:30+00:00",
     "last_summary": "docs/status/END_OF_DAY.md",
     "last_steps": [
       {
