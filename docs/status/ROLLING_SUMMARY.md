@@ -1,14 +1,14 @@
 # Rolling Summary
 
-Generated: 2026-04-18T23:43:04+00:00
+Generated: 2026-04-19T23:08:57+00:00
 
 ## Status
-- Overall: 6/11 tasks complete (55%), 0/3 studies fully complete.
-- By phase: Phase 1: 4/8 (50%); Phase 1 (Bonus Track): 2/3 (67%)
+- Overall: 7/11 tasks complete (64%), 1/3 studies fully complete.
+- By phase: Phase 1: 4/8 (50%); Phase 1 (Bonus Track): 3/3 (100%)
 
 ## Focus
 - Current focus: K's Room, Blade Runner 2049 (Phase 1)
-- What changed: No checklist delta since your previous recap.
+- What changed: 1 task(s) completed since your previous recap.
 
 ## Next
 - Next 1: K's Room, Blade Runner 2049: finish Script analysis
@@ -17,7 +17,7 @@ Generated: 2026-04-18T23:43:04+00:00
 ## Context
 - Last learning focus: Focused on Bonus Study A clip review and redesign questions for the La La Land dinner fight scene.
 - Last chat focus: Discussed bonus-scene direction and asked questions while reviewing reference clips.
-- Recent edits snapshot: docs/status/END_OF_DAY.md, docs/status/ROLLING_SUMMARY.md, docs/status/RESUME.md, docs/status/FALLBACK_SNAPSHOT.md
+- Recent edits snapshot: docs/status/FALLBACK_SNAPSHOT.md, README.md, PROGRESS.md, docs/status/ROLLING_SUMMARY.md
 
 ## Thread Hint
 - Dual-thread requirement: keep planning thread and implementation thread separate once implemented.
