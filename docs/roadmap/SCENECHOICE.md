@@ -67,7 +67,7 @@ Choose one:
 
 * **Parasite** — Park house vs Kim semi-basement
 * **Little Fires Everywhere** — Richardson home vs Warren apartment
-* **Snowpiercer** — front cars vs tail section
+* **Snowpiercer** — front cars vs tail section (**chosen for Study 3**)
 * **Roma** — household/service space relationships
 * **Shoplifters** — cramped shared domestic space
 

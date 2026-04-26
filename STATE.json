@@ -25,9 +25,9 @@
       "note": "Future workflow should preserve separate planning and implementation thread references."
     }
   },
-  "updated_at": "2026-04-19T23:23:30+00:00",
+  "updated_at": "2026-04-26T01:30:29+00:00",
   "resume": {
-    "last_run_at": "2026-04-19T23:23:30+00:00",
+    "last_run_at": "2026-04-26T01:30:29+00:00",
     "last_mode": "now",
     "confidence": 0.85
   },
@@ -35,29 +35,28 @@
     "active_phase": "Phase 1",
     "active_study": {
       "kind": "study",
-      "id": "2",
-      "title": "March House, Little Women",
-      "folder": "Scene Study #2 March House, Little Women/"
+      "id": "3",
+      "title": "Front vs Tail, Snowpiercer",
+      "folder": "Scene Study #3 Front vs Tail, Snowpiercer/"
     },
     "next_actions": [
-      "March House, Little Women: finish Color / palette analysis",
-      "March House, Little Women: finish Hand-drawn scene sketch",
-      "March House, Little Women: finish Script analysis"
+      "Front vs Tail, Snowpiercer: finish Color / palette analysis",
+      "Front vs Tail, Snowpiercer: finish Hand-drawn scene sketch"
     ],
     "blockers": []
   },
   "status": {
-    "overall_tasks_done": 8,
-    "overall_tasks_total": 11,
-    "overall_percent": 73,
-    "studies_complete": 2,
-    "studies_total": 3,
+    "overall_tasks_done": 13,
+    "overall_tasks_total": 15,
+    "overall_percent": 87,
+    "studies_complete": 3,
+    "studies_total": 4,
     "phase_summary": [
       {
         "phase": "Phase 1",
-        "done": 5,
-        "total": 8,
-        "percent": 62
+        "done": 10,
+        "total": 12,
+        "percent": 83
       },
       {
         "phase": "Phase 1 (Bonus Track)",
@@ -106,6 +105,14 @@
       {
         "at": "2026-04-18T20:19:50+00:00",
         "text": "Implemented scoreboard and resume automation; next explore smarter context extraction and workflow enhancements."
+      },
+      {
+        "at": "2026-04-26T01:15:29+00:00",
+        "text": "Chose Study #3 as Snowpiercer front section vs tail section; created split scene analysis and saved two YouTube reference stills."
+      },
+      {
+        "at": "2026-04-26T01:27:42+00:00",
+        "text": "Completed Snowpiercer script study focused on script-only space, prop, and object cues missing from the front/tail screenshots."
       }
     ],
     "chat_history": [
@@ -115,12 +122,12 @@
       }
     ],
     "recent_files": [
+      "docs/status/FALLBACK_SNAPSHOT.md",
+      "docs/status/ROLLING_SUMMARY.md",
+      "docs/status/RESUME.md",
       "README.md",
       "PROGRESS.md",
-      "docs/workflows/SCRIPTSTUDY.md",
-      "docs/status/END_OF_DAY.md",
-      "docs/status/ROLLING_SUMMARY.md",
-      "docs/status/RESUME.md"
+      "Scene Study #3 Front vs Tail, Snowpiercer/snowpiercer-script-study.md"
     ]
   },
   "chat": {
@@ -128,7 +135,7 @@
     "resume_instruction": "In chat, ask: resume thread Production Design thread - 2026-04-18"
   },
   "end_session": {
-    "last_end_at": "2026-04-19T23:23:30+00:00",
+    "last_end_at": "2026-04-26T01:30:29+00:00",
     "last_summary": "docs/status/END_OF_DAY.md",
     "last_steps": [
       {
@@ -141,8 +148,8 @@
       }
     ],
     "fallback_needed": false,
-    "last_fallback_at": "2026-04-19T23:08:57+00:00",
-    "last_fallback_for_resume_at": "2026-04-19T22:53:54+00:00",
+    "last_fallback_at": "2026-04-26T01:30:29+00:00",
+    "last_fallback_for_resume_at": "2026-04-26T01:27:43+00:00",
     "last_fallback_snapshot": "docs/status/FALLBACK_SNAPSHOT.md"
   }
 }

@@ -1,23 +1,23 @@
 # Rolling Summary
 
-Generated: 2026-04-19T23:23:30+00:00
+Generated: 2026-04-26T01:30:29+00:00
 
 ## Status
-- Overall: 8/11 tasks complete (73%), 2/3 studies fully complete.
-- By phase: Phase 1: 5/8 (62%); Phase 1 (Bonus Track): 3/3 (100%)
+- Overall: 13/15 tasks complete (87%), 3/4 studies fully complete.
+- By phase: Phase 1: 10/12 (83%); Phase 1 (Bonus Track): 3/3 (100%)
 
 ## Focus
-- Current focus: March House, Little Women (Phase 1)
-- What changed: 1 task(s) completed since your previous recap.
+- Current focus: Front vs Tail, Snowpiercer (Phase 1)
+- What changed: No checklist delta since your previous recap.
 
 ## Next
-- Next 1: March House, Little Women: finish Color / palette analysis
-- Next 2: March House, Little Women: finish Hand-drawn scene sketch
-- Next 3: March House, Little Women: finish Script analysis
+- Next 1: Front vs Tail, Snowpiercer: finish Color / palette analysis
+- Next 2: Front vs Tail, Snowpiercer: finish Hand-drawn scene sketch
 - Blocker: none logged.
 
 ## Context
 - Last learning focus: Focused on Bonus Study A clip review and redesign questions for the La La Land dinner fight scene.
+- Last chat focus: Discussed bonus-scene direction and asked questions while reviewing reference clips.
 
 ## Thread Hint
 - Dual-thread requirement: keep planning thread and implementation thread separate once implemented.

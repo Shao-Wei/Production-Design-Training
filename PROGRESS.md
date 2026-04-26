@@ -81,13 +81,29 @@ Phase: Phase 1
 Folder: `Scene Study #2 March House, Little Women/`
 
 - [x] Scene analysis
-- [ ] Color / palette analysis
-- [ ] Hand-drawn scene sketch
-- [ ] Script analysis
+- [x] Color / palette analysis
+- [x] Hand-drawn scene sketch
+- [x] Script analysis
 
 Notes:
 - Scene analysis is written in the study folder.
 - Update the remaining checkboxes as those artifacts are added.
+
+## Study #3 - Front vs Tail, Snowpiercer
+
+Phase: Phase 1
+
+Folder: `Scene Study #3 Front vs Tail, Snowpiercer/`
+
+- [x] Scene analysis
+- [ ] Color / palette analysis
+- [ ] Hand-drawn scene sketch
+- [x] Script analysis
+
+Notes:
+- Scene analysis compares the tail section with the front aquarium / sushi bar car.
+- Two YouTube reference stills are saved in the study folder.
+- Script study extracts hidden space, props, and object cues from the screenplay.
 
 ## Bonus Study A - Mia & Seb Dinner Fight, La La Land
 
